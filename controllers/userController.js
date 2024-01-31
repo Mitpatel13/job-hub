@@ -39,10 +39,10 @@ module.exports = {
         try{
             const user = await User.findById(req.params.id);
             const {createdAt , __v, password,...others} = user._doc;
-            res.status(200).send({'msg':"User data get successfully.",others});
+            res.status(200).send({s:0,m:"User data get successfully.",r:others});
         }
         catch(e){
-            res.status(500).send({'msg':e.message})
+            res.status(500).send({s:1,'m':e.message})
         }
     },
     // GET ALL USER 
