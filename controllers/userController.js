@@ -39,7 +39,8 @@ module.exports = {
         try{
             const user = await User.findById(req.params.id);
             const {createdAt , __v, password,...others} = user._doc;
-            res.status(200).send({s:0,m:"User data get successfully.",r:others});
+            const userToken = req.headers['token'].split(" ")[1];
+            res.status(200).send({s:0,m:"User data get successfully.",r:{others,userToken}});
         }
         catch(e){
             res.status(500).send({s:1,'m':e.message})
