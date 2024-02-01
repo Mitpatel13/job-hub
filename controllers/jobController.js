@@ -49,7 +49,7 @@ module.exports = {
     getAllJob:async(req,res)=>{
         try{
             const jobs = await Job.find();
-            res.status(200).send({s:0,m:"All job get successfully.",r:{jobs}})
+            res.status(200).send({s:0,m:"All job get successfully.",r:jobs})
         }
         catch(e){
             res.status(500).send({msg:e.message})        }
