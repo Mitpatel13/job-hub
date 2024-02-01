@@ -6,7 +6,7 @@ module.exports = {
             
            const savedJob = await newJob.save();
            const {createdAt,updatedAt,__v, ...newJobInfo} = savedJob._doc;
-           res.status(200).send({msg:'New job added successfully.',newJobInfo})
+           res.status(200).send({s:0,m:'New job added successfully.',r:newJobInfo})
         }
         catch(e){
             res.status(500).send({msg:e.message})
@@ -20,7 +20,7 @@ module.exports = {
                 $set:req.body
             },{new:true});
             const {createdAt,updatedAt,__v, ...newJobInfo} = job._doc;
-            res.status(200).send({msg:"Job update successfully.",newJobInfo})
+            res.status(200).send({s:0,m:"Job update successfully.",r:newJobInfo})
         }
         catch(e){
 
@@ -30,7 +30,7 @@ module.exports = {
     deleteJob:async(req,res)=>{
         try{
             await Job.findByIdAndDelete(req.params.id);
-            res.status(200).send({msg:"Job deleted successfully."})
+            res.status(200).send({s:0,m:"Job deleted successfully."})
         }
         catch(e){
             res.status(500).send({msg:e.message})
@@ -40,7 +40,7 @@ module.exports = {
         try{
             const job = await Job.findById(req.params.id);
             const {__v,createdAt,updatedAt,...otherData} = job._doc;
-            res.send({msg:"Job get success",otherData});
+            res.status(200).send({s:0,m:"Job get success",r:otherData});
         }
         catch(e){
             res.status(500).send({msg:e.message})
@@ -49,7 +49,7 @@ module.exports = {
     getAllJob:async(req,res)=>{
         try{
             const jobs = await Job.find();
-            res.status(200).send({msg:"All job get successfully.",jobs})
+            res.status(200).send({s:0,m:"All job get successfully.",r:{jobs}})
         }
         catch(e){
             res.status(500).send({msg:e.message})        }
@@ -71,7 +71,7 @@ module.exports = {
                     }
                   ]
             );
-            res.status(200).send({msg:"Searching result",result})
+            res.status(200).send({s:0,m:"Searching result",r:result})
         }catch(e){
             res.status(500).send({msg:e.message})
         }
