@@ -13,7 +13,8 @@ module.exports = {
                 $set:req.body
             },{new:true});
             const {password,__v,createdAt,...others} = updateUser._doc;
-            res.status(200).send({...others});
+            const userToken = req.headers['token'].split(" ")[1];
+            res.status(200).send({s:0,m:"Profile update successfully.",r:{...others,userToken}});
             
 
         }catch(e){
